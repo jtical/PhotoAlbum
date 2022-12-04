@@ -1,0 +1,50 @@
+{{/* Filename: internal/mailer/templates/user_welcome.tmpl */}}
+{{ define "subject" }}Welcome to PhotoAlbum! {{ end }}
+{{ define "plainBody" }}
+Hi,
+
+Thank you for signing up for a PhotoAlbum account!
+We are exicted to have you on board!
+For future reference, please note that your identification number 
+is {{ .userID }}.
+
+Please send a request to the `PUT /v1/users/activated` endpoint with the following JSON
+body to activate your account:
+{"token": "{{.activationToken}}"}
+
+Thanks,
+
+The PhotoAlbum Team
+{{ end }}
+
+{{ define "htmlBody" }}
+<!doctype html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+</head>
+
+<body>
+    <p>Hi,</p>
+    <p>Thank you for signing up for a PhotoAlbum account!</p>   
+    <p>We are exicted to have you on board!</p>
+    <p>For future reference, please note that your identification number 
+    is {{ .userID }}.</p>
+
+    <p> Please send a request to the <code>PUT /v1/users/activated</code> endpoint with the following JSON
+    body to activate your account:</p>
+    <pre><code>
+    {"token": "{{.activationToken}}"}
+    </code></pre>
+    
+    <p>Thanks,</p>
+
+    <p>The PhotoAlbum Team</p>
+</body>
+</html>
+
+{{ end }}
+
+
