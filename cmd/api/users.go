@@ -60,6 +60,13 @@ func (app *application) registerUserHandler(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
+	//add permission to newly inserted user
+	err = app.models.Permissions.AddForUser(user.ID, "photo:read")
+	if err != nil {
+		app.serverErrorResponse(w, r, err)
+		return
+	}
+
 	//create a token to inclue in the email
 	//Generate a token for the new created user
 	token, err := app.models.Tokens.New(user.ID, 1*24*time.Hour, data.ScopeActivation)

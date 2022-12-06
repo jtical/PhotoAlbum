@@ -6,4 +6,13 @@ CREATE TABLE IF NOT EXISTS permissions (
 );
 
 --create a linking table that links users to permissions
---this is an example of a many to many relationships.
+--this is an example of a many to many relationships
+CREATE TABLE IF NOT EXISTS users_permissions (
+    user_id bigint NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+    permission_id bigint NOT NULL REFERENCES permissions (id) ON DELETE CASCADE,
+    PRIMARY KEY (user_id, permission_id)
+);
+
+INSERT INTO permissions (code)
+VALUES
+('photo:read'), ('photo:write');
